@@ -1,0 +1,32 @@
+import pandas as pd
+import json
+import pandas_ta as ta
+
+data = pd.read_json('day.json')
+
+data['MA50'] = data.ta.sma(50)
+data['MA100'] = data.ta.sma(100)
+
+# Calculate the maximum value of returns using rolling().max()
+roll_max = apple_price.rolling(min_periods=1,window=250).max()
+# Calculate daily draw-down from rolling max
+daily_drawdown = apple_price/roll_max - 1.0
+# Calculate maximum daily draw-down
+max_daily_drawdown = daily_drawdown.rolling(min_periods=1,window=250).min()
+# Plot the results
+daily_drawdown.plot()
+max_daily_drawdown.plot()
+plt.show()
+
+
+total_return = (apple_price[-1] - apple_price[0]) /
+apple_price[0]
+print (total_return)
+annualized_return=((1 + total_return)**(12/months))-1
+print (annualized_return)
+# Select three year period
+apple_price = apple_price.loc['2015-01-01':'2017-12-31']
+apple_price.tail(3)
+# Calculate annualized return over 3 years
+annualized_return = ((1 + total_return)**(1/3))-1
+print (annualized_return)
